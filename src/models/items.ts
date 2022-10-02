@@ -2,9 +2,9 @@ import { Table, Column, Model, DataType } from 'sequelize-typescript';
 
 @Table({
   timestamps: false,
-  tableName: 'users',
+  tableName: 'items',
 })
-export class Users extends Model {
+export class Items extends Model {
   @Column({
     type: DataType.UUID,
     defaultValue: DataType.UUIDV4,
@@ -16,41 +16,29 @@ export class Users extends Model {
     type: DataType.STRING,
     allowNull: false,
   })
-  username!: string;
+  title!: string;
 
   @Column({
     type: DataType.STRING,
     allowNull: false,
   })
-  password!: string;
-
-  @Column({
-    type: DataType.BOOLEAN,
-    allowNull: false,
-  })
-  isDarkMode!: boolean;
-
-  @Column({
-    type: DataType.BOOLEAN,
-    allowNull: false,
-  })
-  isBlocked!: boolean;
-
-  @Column({
-    type: DataType.BOOLEAN,
-    allowNull: false,
-  })
-  isAdmin!: boolean;
-
-  @Column({
-    type: DataType.BOOLEAN,
-    allowNull: false,
-  })
-  isAuth!: boolean;
+  author?: string;
 
   @Column({
     type: DataType.STRING,
     allowNull: false,
   })
-  language!: string;
+  content?: string;
+
+  @Column({
+    type: DataType.STRING,
+    allowNull: false,
+  })
+  publicateAt?: string;
+
+  @Column({
+    type: DataType.NUMBER,
+    allowNull: false,
+  })
+  likes!: number;
 }

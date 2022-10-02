@@ -1,6 +1,10 @@
 import express from 'express';
 import dotenv from 'dotenv';
 import userRoutes from './routes/users';
+import tagRoutes from './routes/tags';
+import commentRoutes from './routes/tags';
+import collectionRoutes from './routes/tags';
+import itemRoutes from './routes/items';
 import connection from './db/config';
 import cors from 'cors';
 import { json, urlencoded } from 'body-parser';
@@ -14,6 +18,10 @@ app.use(json());
 app.use(cors());
 app.use(urlencoded({ extended: true }));
 app.use('/users', userRoutes);
+app.use('/tags', tagRoutes);
+app.use('/comments', commentRoutes);
+app.use('/collections', collectionRoutes);
+app.use('/items', itemRoutes);
 app.use((err: Error, req: express.Request, res: express.Response, next: express.NextFunction) => {
   res.status(500).json({ message: err.message });
 });

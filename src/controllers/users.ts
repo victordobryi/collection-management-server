@@ -1,11 +1,17 @@
 import { RequestHandler } from 'express';
 import { v4 } from 'uuid';
-
 import { Users } from '../models/users';
 
 export const createUser: RequestHandler = async (req, res, next) => {
   try {
-    const user = await Users.create({ ...req.body, id: v4() });
+    const user = await Users.create({
+      ...req.body,
+      id: v4(),
+      isAuth: true,
+      isBlocked: false,
+      isDarkMode: false,
+      isAdmin: false,
+    });
     return res.status(200).json({ message: 'User created successfully', data: user });
   } catch (error) {
     if (error instanceof Error)
