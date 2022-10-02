@@ -19,12 +19,12 @@ app.use((err: Error, req: express.Request, res: express.Response, next: express.
 });
 
 connection
-  .sync()
+  .authenticate()
   .then(() => {
-    console.log('Database successfully connected');
+    console.log('Connection has been established successfully.');
   })
   .catch((err) => {
-    console.log('Error', err);
+    console.error('Unable to connect to the database:', err);
   });
 
 app.listen(PORT, () => {
