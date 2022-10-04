@@ -28,12 +28,6 @@ export class Users extends Model {
     type: DataType.BOOLEAN,
     allowNull: false,
   })
-  isDarkMode!: boolean;
-
-  @Column({
-    type: DataType.BOOLEAN,
-    allowNull: false,
-  })
   isBlocked!: boolean;
 
   @Column({
@@ -41,16 +35,4 @@ export class Users extends Model {
     allowNull: false,
   })
   isAdmin!: boolean;
-
-  @Column({
-    type: DataType.BOOLEAN,
-    allowNull: false,
-  })
-  isAuth!: boolean;
-
-  @Column({
-    type: DataType.STRING,
-    allowNull: false,
-  })
-  language!: string;
 }

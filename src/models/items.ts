@@ -41,4 +41,10 @@ export class Items extends Model {
     allowNull: false,
   })
   likes!: number;
+
+  @Column({
+    type: DataType.STRING,
+    allowNull: false,
+  })
+  createTime!: string;
 }
