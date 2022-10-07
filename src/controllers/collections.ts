@@ -1,10 +1,12 @@
 import { RequestHandler } from 'express';
+import { v4 } from 'uuid';
 import { Collections } from '../models/collections';
 
 export const createCollection: RequestHandler = async (req, res, next) => {
   try {
     const collection = await Collections.create({
       ...req.body,
+      id: v4(),
     });
     return res.status(200).json({ message: 'Collection created successfully', data: collection });
   } catch (error) {

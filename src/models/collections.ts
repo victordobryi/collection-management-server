@@ -13,6 +13,13 @@ export class Collections extends Model {
   id!: string;
 
   @Column({
+    type: DataType.UUID,
+    defaultValue: DataType.UUIDV4,
+    primaryKey: true,
+  })
+  userId!: string;
+
+  @Column({
     type: DataType.STRING,
     allowNull: false,
   })
