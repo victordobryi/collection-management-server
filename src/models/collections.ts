@@ -35,4 +35,10 @@ export class Collections extends Model {
     allowNull: false,
   })
   img!: string;
+
+  @Column({
+    type: DataType.STRING,
+    allowNull: false,
+  })
+  additionalInputs!: string;
 }

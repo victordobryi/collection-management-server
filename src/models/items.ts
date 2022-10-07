@@ -19,24 +19,6 @@ export class Items extends Model {
   title!: string;
 
   @Column({
-    type: DataType.STRING,
-    allowNull: false,
-  })
-  author?: string;
-
-  @Column({
-    type: DataType.STRING,
-    allowNull: false,
-  })
-  content?: string;
-
-  @Column({
-    type: DataType.STRING,
-    allowNull: false,
-  })
-  publicateAt?: string;
-
-  @Column({
     type: DataType.NUMBER,
     allowNull: false,
   })
@@ -47,4 +29,10 @@ export class Items extends Model {
     allowNull: false,
   })
   createTime!: string;
+
+  @Column({
+    type: DataType.STRING,
+    allowNull: false,
+  })
+  additionalInputs!: string;
 }
