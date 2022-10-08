@@ -42,4 +42,10 @@ export class Items extends Model {
     allowNull: false,
   })
   additionalInputs!: string;
+
+  @Column({
+    type: DataType.STRING,
+    allowNull: false,
+  })
+  img!: string;
 }

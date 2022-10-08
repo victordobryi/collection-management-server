@@ -35,4 +35,10 @@ export class Users extends Model {
     allowNull: false,
   })
   isAdmin!: boolean;
+
+  @Column({
+    type: DataType.STRING,
+    allowNull: false,
+  })
+  img!: string;
 }
