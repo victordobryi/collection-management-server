@@ -90,7 +90,7 @@ export class ServerSocket {
 
     socket.on('add_NewCollection', (collection) => {
       const users = Object.values(this.users);
-      this.SendMessage('add_item', users, collection);
+      this.SendMessage('add_collection', users, collection);
     });
   };
 
