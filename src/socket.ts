@@ -7,14 +7,10 @@ export class ServerSocket {
   public io: Server;
 
   public users: { [uid: string]: string };
-  public items: { [uid: string]: string };
-  public collections: { [uid: string]: string };
 
   constructor(server: HttpServer) {
     ServerSocket.instance = this;
     this.users = {};
-    this.items = {};
-    this.collections = {};
     this.io = new Server(server, {
       serveClient: false,
       pingInterval: 10000,
@@ -88,13 +84,13 @@ export class ServerSocket {
     });
 
     socket.on('add_NewItem', (item) => {
-      const items = Object.values(this.items);
-      this.SendMessage('add_item', items, item);
+      const users = Object.values(this.users);
+      this.SendMessage('add_item', users, item);
     });
 
     socket.on('add_NewCollection', (collection) => {
-      const collections = Object.values(this.collections);
-      this.SendMessage('add_item', collections, collection);
+      const users = Object.values(this.users);
+      this.SendMessage('add_item', users, collection);
     });
   };
 
