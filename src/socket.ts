@@ -6,7 +6,6 @@ export class ServerSocket {
   public static instance: ServerSocket;
   public io: Server;
 
-  /** Master list of all connected users */
   public users: { [uid: string]: string };
 
   constructor(server: HttpServer) {
@@ -72,6 +71,16 @@ export class ServerSocket {
 
         this.SendMessage('user_disconnected', users, socket.id);
       }
+    });
+
+    socket.on('add_NewUser', (user) => {
+      const users = Object.values(this.users);
+      this.SendMessage('add_user', users, user);
+    });
+
+    socket.on('add_NewMessage', (user) => {
+      const users = Object.values(this.users);
+      this.SendMessage('add_message', users, user);
     });
   };
 
