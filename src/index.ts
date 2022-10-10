@@ -1,5 +1,6 @@
 import express from 'express';
 import dotenv from 'dotenv';
+import { createServer } from 'http';
 import userRoutes from './routes/users';
 import tagRoutes from './routes/tags';
 import commentRoutes from './routes/comments';
@@ -8,11 +9,14 @@ import itemRoutes from './routes/items';
 import connection from './db/config';
 import cors from 'cors';
 import { json, urlencoded } from 'body-parser';
+import { ServerSocket } from './socket';
 
 dotenv.config();
 
 const app = express();
+const server = createServer(app);
 const PORT = process.env.PORT || 8000;
+new ServerSocket(server);
 
 app.use(json());
 app.use(cors());
@@ -35,6 +39,6 @@ connection
     console.error('Unable to connect to the database:', err);
   });
 
-app.listen(PORT, () => {
+server.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
 });
