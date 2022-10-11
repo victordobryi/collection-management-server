@@ -8,7 +8,6 @@ export const createUser: RequestHandler = async (req, res, next) => {
       ...req.body,
       id: v4(),
       isBlocked: false,
-      isAdmin: false,
     });
     return res.status(200).json({ message: 'User created successfully', data: user });
   } catch (error) {
