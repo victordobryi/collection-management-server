@@ -78,6 +78,11 @@ export class ServerSocket {
       this.SendMessage('add_user', users, user);
     });
 
+    socket.on('update_CurrentUser', (user) => {
+      const users = Object.values(this.users);
+      this.SendMessage('update_user', users, user);
+    });
+
     socket.on('add_NewComment', (user) => {
       const users = Object.values(this.users);
       this.SendMessage('add_comment', users, user);
@@ -88,9 +93,19 @@ export class ServerSocket {
       this.SendMessage('add_item', users, item);
     });
 
+    socket.on('update_CurrentItem', (item) => {
+      const users = Object.values(this.users);
+      this.SendMessage('update_item', users, item);
+    });
+
     socket.on('add_NewCollection', (collection) => {
       const users = Object.values(this.users);
       this.SendMessage('add_collection', users, collection);
+    });
+
+    socket.on('update_CurrentCollection', (collection) => {
+      const users = Object.values(this.users);
+      this.SendMessage('update_collection', users, collection);
     });
   };
 
