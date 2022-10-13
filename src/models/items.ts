@@ -20,6 +20,13 @@ export class Items extends Model {
   collectionId!: string;
 
   @Column({
+    type: DataType.UUID,
+    defaultValue: DataType.UUIDV4,
+    primaryKey: true,
+  })
+  userId!: string;
+
+  @Column({
     type: DataType.STRING,
     allowNull: false,
   })
