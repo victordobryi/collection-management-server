@@ -16,22 +16,22 @@ export const addLike: RequestHandler = async (req, res, next) => {
 };
 
 export const deleteLike: RequestHandler = async (req, res, next) => {
-  const { id } = req.params;
+  const { postId } = req.body;
   try {
-    const deletedLike: Likes | null = await Likes.findByPk(id);
+    const deletedLike: Likes | null = await Likes.findOne(postId);
     if (!deletedLike) {
       res.status(404).send({
-        message: `Not found Like with id ${id}.`,
+        message: `Not found Like with id ${postId}.`,
       });
     } else {
-      await Likes.destroy({ where: { id } });
+      await Likes.destroy({ where: { postId } });
       return res
         .status(200)
-        .json({ message: `Like ${id} deleted successfully`, data: deletedLike });
+        .json({ message: `Like ${postId} deleted successfully`, data: deletedLike });
     }
   } catch (error) {
     res.status(500).send({
-      message: 'Could not delete Like with id ' + id,
+      message: 'Could not delete Like with id ' + postId,
     });
   }
 };
@@ -79,21 +79,21 @@ export const getLikeById: RequestHandler = async (req, res, next) => {
 };
 
 export const updateLike: RequestHandler = async (req, res, next) => {
-  const { id } = req.params;
+  const { postId } = req.body;
   try {
-    const updatedItem: Likes | null = await Likes.findByPk(id);
+    const updatedItem: Likes | null = await Likes.findOne(postId);
     if (!updatedItem) {
       res.status(404).send({
-        message: `Not found Like with id ${id}.`,
+        message: `Not found Like with id ${postId}.`,
       });
     } else {
       await Likes.update({ ...req.body }, { where: { Likes } });
-      const newLike: Likes | null = await Likes.findByPk(id);
+      const newLike: Likes | null = await Likes.findByPk(postId);
       return res.status(200).json({ message: `Item fetched successfully`, data: newLike });
     }
   } catch (error) {
     res.status(500).send({
-      message: 'Error updating Item with id ' + id,
+      message: 'Error updating Item with id ' + postId,
     });
   }
 };
