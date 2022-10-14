@@ -63,7 +63,7 @@ export const getAllLikes: RequestHandler = async (req, res, next) => {
 export const getLikeById: RequestHandler = async (req, res, next) => {
   const { postId } = req.body;
   try {
-    const like: Likes | null = await Likes.findByPk(postId);
+    const like: Likes | null = await Likes.findOne(postId);
     if (!like) {
       res.status(404).send({
         message: `Not found Like with id ${postId}.`,
