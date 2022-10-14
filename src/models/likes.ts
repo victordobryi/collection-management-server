@@ -23,4 +23,10 @@ export class Likes extends Model {
     allowNull: false,
   })
   likedUsers!: string;
+
+  @Column({
+    type: DataType.NUMBER,
+    allowNull: false,
+  })
+  count!: number;
 }
