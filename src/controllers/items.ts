@@ -11,7 +11,7 @@ export const createItem: RequestHandler = async (req, res, next) => {
       id: itemId,
     });
     const like = await Likes.create({
-      likedUsers: JSON.stringify([]),
+      likedUsers: '',
       id: v4(),
       count: 0,
       postId: itemId,
