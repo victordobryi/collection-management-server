@@ -6,6 +6,13 @@ import { Table, Column, Model, DataType } from 'sequelize-typescript';
 })
 export class Likes extends Model {
   @Column({
+    type: DataType.UUID,
+    defaultValue: DataType.UUIDV4,
+    primaryKey: true,
+  })
+  id!: string;
+
+  @Column({
     type: DataType.STRING,
     allowNull: false,
   })
