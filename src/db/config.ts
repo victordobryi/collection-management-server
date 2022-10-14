@@ -4,6 +4,7 @@ import { Tags } from '../models/tags';
 import { Comments } from '../models/comments';
 import { Collections } from '../models/collections';
 import { Items } from '../models/items';
+import { Likes } from '../models/likes';
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -15,7 +16,7 @@ const connection = new Sequelize({
   password: process.env.PASSWORD,
   database: process.env.DATABASE,
   logging: false,
-  models: [Users, Tags, Comments, Collections, Items],
+  models: [Users, Tags, Comments, Collections, Items, Likes],
 });
 
 export default connection;
