@@ -10,7 +10,12 @@ export const createItem: RequestHandler = async (req, res, next) => {
       ...req.body,
       id: itemId,
     });
-    const like = await Likes.create({ likedUsers: '', id: v4(), count: 0, postId: itemId });
+    const like = await Likes.create({
+      likedUsers: JSON.stringify([]),
+      id: v4(),
+      count: 0,
+      postId: itemId,
+    });
     return res.status(200).json({ message: 'Item created successfully', data: { item, like } });
   } catch (error) {
     if (error instanceof Error)
