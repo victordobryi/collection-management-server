@@ -107,6 +107,11 @@ export class ServerSocket {
       const users = Object.values(this.users);
       this.SendMessage('update_collection', users, collection);
     });
+
+    socket.on('toggle_CurrentLike', (like) => {
+      const users = Object.values(this.users);
+      this.SendMessage('toggle_like', users, like);
+    });
   };
 
   GetUidFromSocketID = (id: string) => {
