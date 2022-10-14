@@ -16,5 +16,29 @@ export class Comments extends Model {
     type: DataType.STRING,
     allowNull: false,
   })
-  name!: string;
+  message!: string;
+
+  @Column({
+    type: DataType.UUID,
+    allowNull: false,
+  })
+  fromUserId!: string;
+
+  @Column({
+    type: DataType.UUID,
+    allowNull: false,
+  })
+  toUserId!: string;
+
+  @Column({
+    type: DataType.STRING,
+    allowNull: false,
+  })
+  currentDate!: string;
+
+  @Column({
+    type: DataType.STRING,
+    allowNull: false,
+  })
+  fromUserName!: string;
 }
