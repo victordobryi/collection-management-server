@@ -61,19 +61,19 @@ export const getAllLikes: RequestHandler = async (req, res, next) => {
 };
 
 export const getLikeById: RequestHandler = async (req, res, next) => {
-  const { id } = req.params;
+  const { postId } = req.body;
   try {
-    const like: Likes | null = await Likes.findByPk(id);
+    const like: Likes | null = await Likes.findByPk(postId);
     if (!like) {
       res.status(404).send({
-        message: `Not found Like with id ${id}.`,
+        message: `Not found Like with id ${postId}.`,
       });
     } else {
       return res.status(200).json({ message: `Like fetched successfully`, data: like });
     }
   } catch (error) {
     res.status(500).send({
-      message: 'Error retrieving Like with id ' + id,
+      message: 'Error retrieving Like with id ' + postId,
     });
   }
 };
