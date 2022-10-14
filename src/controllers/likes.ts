@@ -87,7 +87,7 @@ export const updateLike: RequestHandler = async (req, res, next) => {
         message: `Not found Like with id ${postId}.`,
       });
     } else {
-      await Likes.update({ ...req.body }, { where: { Likes } });
+      await Likes.update({ ...req.body }, { where: { postId } });
       const newLike: Likes | null = await Likes.findOne(postId);
       return res.status(200).json({ message: `Item fetched successfully`, data: newLike });
     }
