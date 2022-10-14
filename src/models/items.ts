@@ -33,12 +33,6 @@ export class Items extends Model {
   title!: string;
 
   @Column({
-    type: DataType.NUMBER,
-    allowNull: false,
-  })
-  likes!: number;
-
-  @Column({
     type: DataType.STRING,
     allowNull: false,
   })

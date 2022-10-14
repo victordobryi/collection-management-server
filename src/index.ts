@@ -6,6 +6,7 @@ import tagRoutes from './routes/tags';
 import commentRoutes from './routes/comments';
 import collectionRoutes from './routes/collections';
 import itemRoutes from './routes/items';
+import likeRoutes from './routes/likes';
 import connection from './db/config';
 import cors from 'cors';
 import { json, urlencoded } from 'body-parser';
@@ -26,6 +27,7 @@ app.use('/tags', tagRoutes);
 app.use('/comments', commentRoutes);
 app.use('/collections', collectionRoutes);
 app.use('/items', itemRoutes);
+app.use('/likes', likeRoutes);
 app.use((err: Error, req: express.Request, res: express.Response, next: express.NextFunction) => {
   res.status(500).json({ message: err.message });
 });
