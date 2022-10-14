@@ -108,9 +108,14 @@ export class ServerSocket {
       this.SendMessage('update_collection', users, collection);
     });
 
-    socket.on('toggle_CurrentLike', (like) => {
+    socket.on('add_CurrentLike', (like) => {
       const users = Object.values(this.users);
-      this.SendMessage('toggle_like', users, like);
+      this.SendMessage('add_like', users, like);
+    });
+
+    socket.on('remove_CurrentLike', (like) => {
+      const users = Object.values(this.users);
+      this.SendMessage('remove_like', users, like);
     });
   };
 
