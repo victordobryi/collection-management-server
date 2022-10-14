@@ -4,7 +4,7 @@ import { Likes } from '../models/likes';
 export const addLike: RequestHandler = async (req, res, next) => {
   try {
     const item = await Likes.create({
-      ...req.params,
+      ...req.body,
     });
     return res.status(200).json({ message: 'Like added successfully', data: item });
   } catch (error) {
