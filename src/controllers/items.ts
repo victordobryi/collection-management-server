@@ -1,13 +1,16 @@
 import { RequestHandler } from 'express';
 import { v4 } from 'uuid';
 import { Items } from '../models/items';
+import { Likes } from '../models/likes';
 
 export const createItem: RequestHandler = async (req, res, next) => {
   try {
+    const itemId = v4();
     const item = await Items.create({
       ...req.body,
-      id: v4(),
+      id: itemId,
     });
+    const like = await Likes.create({ likedUsers: '', id: v4(), count: 0, postId: itemId });
     return res.status(200).json({ message: 'Item created successfully', data: item });
   } catch (error) {
     if (error instanceof Error)
