@@ -16,22 +16,22 @@ export const addLike: RequestHandler = async (req, res, next) => {
 };
 
 export const deleteLike: RequestHandler = async (req, res, next) => {
-  const { postId } = req.params;
+  const { id } = req.params;
   try {
-    const deletedItem: Likes | null = await Likes.findByPk(postId);
-    if (!deletedItem) {
+    const deletedLike: Likes | null = await Likes.findByPk(id);
+    if (!deletedLike) {
       res.status(404).send({
-        message: `Not found Like with id ${postId}.`,
+        message: `Not found Like with id ${id}.`,
       });
     } else {
-      await Likes.destroy({ where: { postId } });
+      await Likes.destroy({ where: { id } });
       return res
         .status(200)
-        .json({ message: `Like ${postId} deleted successfully`, data: deletedItem });
+        .json({ message: `Like ${id} deleted successfully`, data: deletedLike });
     }
   } catch (error) {
     res.status(500).send({
-      message: 'Could not delete Like with id ' + postId,
+      message: 'Could not delete Like with id ' + id,
     });
   }
 };
@@ -61,39 +61,39 @@ export const getAllLikes: RequestHandler = async (req, res, next) => {
 };
 
 export const getLikeById: RequestHandler = async (req, res, next) => {
-  const { postId } = req.params;
+  const { id } = req.params;
   try {
-    const like: Likes | null = await Likes.findByPk(postId);
+    const like: Likes | null = await Likes.findByPk(id);
     if (!like) {
       res.status(404).send({
-        message: `Not found Like with id ${postId}.`,
+        message: `Not found Like with id ${id}.`,
       });
     } else {
       return res.status(200).json({ message: `Like fetched successfully`, data: like });
     }
   } catch (error) {
     res.status(500).send({
-      message: 'Error retrieving Like with id ' + postId,
+      message: 'Error retrieving Like with id ' + id,
     });
   }
 };
 
 export const updateLike: RequestHandler = async (req, res, next) => {
-  const { postId } = req.params;
+  const { id } = req.params;
   try {
-    const updatedItem: Likes | null = await Likes.findByPk(postId);
+    const updatedItem: Likes | null = await Likes.findByPk(id);
     if (!updatedItem) {
       res.status(404).send({
-        message: `Not found Like with id ${postId}.`,
+        message: `Not found Like with id ${id}.`,
       });
     } else {
       await Likes.update({ ...req.body }, { where: { Likes } });
-      const newLike: Likes | null = await Likes.findByPk(postId);
+      const newLike: Likes | null = await Likes.findByPk(id);
       return res.status(200).json({ message: `Item fetched successfully`, data: newLike });
     }
   } catch (error) {
     res.status(500).send({
-      message: 'Error updating Item with id ' + postId,
+      message: 'Error updating Item with id ' + id,
     });
   }
 };
