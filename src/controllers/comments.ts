@@ -42,3 +42,15 @@ export const getCommentById: RequestHandler = async (req, res, next) => {
     });
   }
 };
+
+export const deleteAllComments: RequestHandler = async (req, res, next) => {
+  try {
+    await Comments.destroy({ where: {}, truncate: true });
+    return res.status(200).json({ message: `All Comments deleted successfully` });
+  } catch (error) {
+    if (error instanceof Error)
+      res.status(500).send({
+        message: error.message || 'Some error occurred while removing all comments.',
+      });
+  }
+};
