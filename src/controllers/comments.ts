@@ -1,9 +1,10 @@
 import { RequestHandler } from 'express';
 import { Comments } from '../models/comments';
+import { v4 } from 'uuid';
 
 export const createComment: RequestHandler = async (req, res, next) => {
   try {
-    const comment = await Comments.create({ ...req.body });
+    const comment = await Comments.create({ ...req.body, id: v4() });
     return res.status(200).json({ message: 'Comment created successfully', data: comment });
   } catch (error) {
     if (error instanceof Error)
