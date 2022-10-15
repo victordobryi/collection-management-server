@@ -16,7 +16,7 @@ export class Comments extends Model {
     type: DataType.STRING,
     allowNull: false,
   })
-  message!: string;
+  comment!: string;
 
   @Column({
     type: DataType.UUID,
