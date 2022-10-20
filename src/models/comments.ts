@@ -31,6 +31,12 @@ export class Comments extends Model {
   toUserId!: string;
 
   @Column({
+    type: DataType.UUID,
+    allowNull: false,
+  })
+  toItemId!: string;
+
+  @Column({
     type: DataType.STRING,
     allowNull: false,
   })
