@@ -83,9 +83,9 @@ export class ServerSocket {
       this.SendMessage('update_user', users, user);
     });
 
-    socket.on('add_NewComment', (user) => {
+    socket.on('add_NewComment', (comment) => {
       const users = Object.values(this.users);
-      this.SendMessage('add_comment', users, user);
+      this.SendMessage('add_comment', users, comment);
     });
 
     socket.on('add_NewItem', (item) => {
