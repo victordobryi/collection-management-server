@@ -74,7 +74,7 @@ export const getItemById: RequestHandler = async (req, res, next) => {
   const { id } = req.params;
   try {
     const item: Items | null = await Items.findByPk(id);
-    const likes: Likes[] = await Likes.findAll({ where: { id } });
+    const likes: Likes[] = await Likes.findAll({ where: { postId: id } });
     if (!item) {
       res.status(404).send({
         message: `Not found Item with id ${id}.`,
