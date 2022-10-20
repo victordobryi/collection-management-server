@@ -74,12 +74,15 @@ export const getItemById: RequestHandler = async (req, res, next) => {
   const { id } = req.params;
   try {
     const item: Items | null = await Items.findByPk(id);
+    const likes: Likes[] = await Likes.findAll({ where: { id } });
     if (!item) {
       res.status(404).send({
         message: `Not found Item with id ${id}.`,
       });
     } else {
-      return res.status(200).json({ message: `Item fetched successfully`, data: item });
+      return res
+        .status(200)
+        .json({ message: `Item fetched successfully`, data: item, likes: likes });
     }
   } catch (error) {
     res.status(500).send({
