@@ -1,5 +1,6 @@
 import { RequestHandler } from 'express';
 import { v4 } from 'uuid';
+import { Comments } from '../models/comments';
 import { Items } from '../models/items';
 import { Likes } from '../models/likes';
 
@@ -75,6 +76,7 @@ export const getItemById: RequestHandler = async (req, res, next) => {
   try {
     const item: Items | null = await Items.findByPk(id);
     const likes: Likes[] = await Likes.findAll({ where: { postId: id } });
+    const comments: Comments[] = await Comments.findAll({ where: { toItemId: id } });
     if (!item) {
       res.status(404).send({
         message: `Not found Item with id ${id}.`,
@@ -82,7 +84,7 @@ export const getItemById: RequestHandler = async (req, res, next) => {
     } else {
       return res
         .status(200)
-        .json({ message: `Item fetched successfully`, data: item, likes: likes });
+        .json({ message: `Item fetched successfully`, data: item, likes, comments });
     }
   } catch (error) {
     res.status(500).send({
