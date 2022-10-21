@@ -69,12 +69,14 @@ export const getAllItems: RequestHandler = async (req, res, next) => {
   try {
     const allItems: Items[] = await Items.findAll();
     const fullData: FullData[] = [];
-    allItems.map(async ({ id }) => {
-      const item: Items | null = await Items.findByPk(id);
-      const likes: Likes[] = await Likes.findAll({ where: { postId: id } });
-      const comments: Comments[] = await Comments.findAll({ where: { toItemId: id } });
-      fullData.push({ data: item, likes, comments });
-    });
+    await Promise.all(
+      allItems.map(async ({ id }) => {
+        const item: Items | null = await Items.findByPk(id);
+        const likes: Likes[] = await Likes.findAll({ where: { postId: id } });
+        const comments: Comments[] = await Comments.findAll({ where: { toItemId: id } });
+        fullData.push({ data: item, likes, comments });
+      })
+    );
     return res.status(200).json({ message: 'Items fetched successfully', data: fullData });
   } catch (error) {
     if (error instanceof Error)
