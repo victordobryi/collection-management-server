@@ -113,6 +113,11 @@ export class ServerSocket {
       this.SendMessage('add_like', users, like);
     });
 
+    socket.on('add_CurrentTag', (tag) => {
+      const users = Object.values(this.users);
+      this.SendMessage('add_tag', users, tag);
+    });
+
     socket.on('remove_CurrentLike', (like) => {
       const users = Object.values(this.users);
       this.SendMessage('remove_like', users, like);
