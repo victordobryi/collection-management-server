@@ -69,7 +69,7 @@ export const getAllItems: RequestHandler = async (req, res, next) => {
       const comments: Comments[] = await Comments.findAll({ where: { toItemId: id } });
       fullData.push({ data: item, likes, comments });
     });
-    return res.status(200).json({ message: 'Items fetched successfully', data: allItems });
+    return res.status(200).json({ message: 'Items fetched successfully', data: fullData });
   } catch (error) {
     if (error instanceof Error)
       res.status(500).send({
