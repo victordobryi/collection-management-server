@@ -44,6 +44,27 @@ export const getCommentById: RequestHandler = async (req, res, next) => {
   }
 };
 
+export const deleteComment: RequestHandler = async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    const deletedComment: Comments | null = await Comments.findByPk(id);
+    if (!deletedComment) {
+      res.status(404).send({
+        message: `Not found Comment with id ${id}.`,
+      });
+    } else {
+      await Comments.destroy({ where: { id } });
+      return res
+        .status(200)
+        .json({ message: `Comment ${id} deleted successfully`, data: deletedComment });
+    }
+  } catch (error) {
+    res.status(500).send({
+      message: 'Could not Comment Like with id ' + id,
+    });
+  }
+};
+
 export const deleteAllComments: RequestHandler = async (req, res, next) => {
   try {
     await Comments.destroy({ where: {}, truncate: true });
