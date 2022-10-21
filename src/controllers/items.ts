@@ -4,6 +4,12 @@ import { Comments } from '../models/comments';
 import { Items } from '../models/items';
 import { Likes } from '../models/likes';
 
+interface FullData {
+  data: Items | null;
+  likes: Likes[];
+  comments: Comments[];
+}
+
 export const createItem: RequestHandler = async (req, res, next) => {
   try {
     const itemId = v4();
@@ -62,7 +68,7 @@ export const deleteAllItems: RequestHandler = async (req, res, next) => {
 export const getAllItems: RequestHandler = async (req, res, next) => {
   try {
     const allItems: Items[] = await Items.findAll();
-    const fullData = [];
+    const fullData: FullData[] = [];
     allItems.map(async ({ id }) => {
       const item: Items | null = await Items.findByPk(id);
       const likes: Likes[] = await Likes.findAll({ where: { postId: id } });
