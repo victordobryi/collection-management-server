@@ -3,7 +3,6 @@ import { v4 } from 'uuid';
 import { Comments } from '../models/comments';
 import { Items } from '../models/items';
 import { Likes } from '../models/likes';
-import { Tags } from '../models/tags';
 
 interface FullData {
   data: Items | null;
