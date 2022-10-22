@@ -9,7 +9,6 @@ interface FullData {
   data: Items | null;
   likes: Likes[];
   comments: Comments[];
-  tags: Tags[];
 }
 
 export const createItem: RequestHandler = async (req, res, next) => {
@@ -76,8 +75,7 @@ export const getAllItems: RequestHandler = async (req, res, next) => {
         const item: Items | null = await Items.findByPk(id);
         const likes: Likes[] = await Likes.findAll({ where: { postId: id } });
         const comments: Comments[] = await Comments.findAll({ where: { toItemId: id } });
-        const tags: Tags[] = await Tags.findAll({ where: { itemId: id } });
-        fullData.push({ data: item, likes, comments, tags });
+        fullData.push({ data: item, likes, comments });
       })
     );
     return res.status(200).json({ message: 'Items fetched successfully', data: fullData });
