@@ -48,5 +48,11 @@ export class Items extends Model {
     type: DataType.STRING,
     allowNull: false,
   })
+  tags!: string;
+
+  @Column({
+    type: DataType.STRING,
+    allowNull: false,
+  })
   img!: string;
 }

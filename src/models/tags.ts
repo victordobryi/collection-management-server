@@ -17,10 +17,4 @@ export class Tags extends Model {
     allowNull: false,
   })
   name!: string;
-
-  @Column({
-    type: DataType.STRING,
-    allowNull: false,
-  })
-  itemId!: string;
 }

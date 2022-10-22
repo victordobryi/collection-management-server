@@ -1,9 +1,10 @@
 import { RequestHandler } from 'express';
 import { Tags } from '../models/tags';
+import { v4 } from 'uuid';
 
 export const createTag: RequestHandler = async (req, res, next) => {
   try {
-    const tag = await Tags.create({ ...req.body });
+    const tag = await Tags.create({ ...req.body, id: v4() });
     return res.status(200).json({ message: 'Tag created successfully', data: tag });
   } catch (error) {
     if (error instanceof Error)
