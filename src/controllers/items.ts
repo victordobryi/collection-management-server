@@ -4,12 +4,6 @@ import { Comments } from '../models/comments';
 import { Items } from '../models/items';
 import { Likes } from '../models/likes';
 
-interface FullData {
-  data: Items | null;
-  likes: Likes | null;
-  comments: Comments[];
-}
-
 export const createItem: RequestHandler = async (req, res, next) => {
   try {
     const itemId = v4();
@@ -68,16 +62,7 @@ export const deleteAllItems: RequestHandler = async (req, res, next) => {
 export const getAllItems: RequestHandler = async (req, res, next) => {
   try {
     const allItems: Items[] = await Items.findAll();
-    const fullData: FullData[] = [];
-    await Promise.all(
-      allItems.map(async ({ id }) => {
-        const item: Items | null = await Items.findByPk(id);
-        const likes: Likes | null = await Likes.findOne({ where: { postId: id } });
-        const comments: Comments[] = await Comments.findAll({ where: { toItemId: id } });
-        fullData.push({ data: item, likes, comments });
-      })
-    );
-    return res.status(200).json({ message: 'Items fetched successfully', data: fullData });
+    return res.status(200).json({ message: 'Items fetched successfully', data: allItems });
   } catch (error) {
     if (error instanceof Error)
       res.status(500).send({
