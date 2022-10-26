@@ -90,7 +90,7 @@ export const getItemById: RequestHandler = async (req, res, next) => {
   const { id } = req.params;
   try {
     const item: Items | null = await Items.findByPk(id);
-    const likes: Likes[] = await Likes.findAll({ where: { postId: id } });
+    const likes: Likes | null = await Likes.findOne({ where: { postId: id } });
     const comments: Comments[] = await Comments.findAll({ where: { toItemId: id } });
     if (!item) {
       res.status(404).send({
