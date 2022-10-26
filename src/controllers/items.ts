@@ -6,7 +6,7 @@ import { Likes } from '../models/likes';
 
 interface FullData {
   data: Items | null;
-  likes: Likes[];
+  likes: Likes | null;
   comments: Comments[];
 }
 
@@ -72,7 +72,7 @@ export const getAllItems: RequestHandler = async (req, res, next) => {
     await Promise.all(
       allItems.map(async ({ id }) => {
         const item: Items | null = await Items.findByPk(id);
-        const likes: Likes[] = await Likes.findAll({ where: { postId: id } });
+        const likes: Likes | null = await Likes.findOne({ where: { postId: id } });
         const comments: Comments[] = await Comments.findAll({ where: { toItemId: id } });
         fullData.push({ data: item, likes, comments });
       })
